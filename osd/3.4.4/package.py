@@ -62,6 +62,7 @@ def build_command():
         "-DNO_GLTESTS=ON",
         "-DBUILD_SHARED_LIBS=ON",
         "-DNO_OPENCL=ON",
+        "-DCMAKE_CUDA_ARCHITECTURES=75;86",
     ]
 
     import platform

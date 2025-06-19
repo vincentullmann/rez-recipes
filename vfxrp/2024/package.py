@@ -6,8 +6,8 @@ version = "2024"
 def requires():
     req = [
         "python-3.11",
-        "pyqt5-6.5",
-        "pyside2-6.5",
+        "pyqt6-6.5",
+        "pyside6-6.5",
         "numpy-1.24",
         "openexr-3.2",
         "ptex-2.4",

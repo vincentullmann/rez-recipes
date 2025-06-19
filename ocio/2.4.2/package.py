@@ -1,8 +1,8 @@
 name = "ocio"
-version = "2.3.1"
+version = "2.4.2"
 
 requires = [
-    "openexr",
+    "openexr-3.3",
     "python-3.7+",
 ]
 

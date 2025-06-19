@@ -4,18 +4,18 @@ version = "2025"
 @early()
 def requires():
     req = [
-        "~python-3.11",
-        "~pyqt6-6.5",
-        "~pyside6-6.5",
-        "~numpy-1.26",
-        "~openexr-3.3",
-        "~ptex-2.4",
-        "~osd-3.6",
-        "~openvdb-12",
-        "~alembic-1.8",
-        "~ocio-2.4",
-        "~boost-1.85",
-        "~tbb-2021",
+        "alembic-1.8",
+        "boost-1.85",
+        "numpy-1.26",
+        "ocio-2.4",
+        "openexr-3.3",
+        "openvdb-12",
+        "osd-3.6",
+        "ptex-2.4",
+        "pyqt6-6.5",
+        "pyside6-6.5",
+        "python-3.11",
+        "tbb-2021",
     ]
 
     import platform

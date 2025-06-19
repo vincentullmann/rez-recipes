@@ -1,7 +1,11 @@
 name = "osd"
 version = "3.6.0"
 
-requires = ["imath-3", "ptex-2.4", "zlib-1.2"]
+requires = [
+    "imath-3",
+    "ptex-2.4",
+    "zlib-1.2",
+]
 
 
 @early()
@@ -54,6 +58,7 @@ def build_command():
         "-DCMAKE_INSTALL_PREFIX={install_path}",
         f'-DCMAKE_MODULE_PATH="{env("CMAKE_MODULE_PATH")}"',
         f'-DCMAKE_BUILD_TYPE="{env("REZ_BUILD_CONFIG")}"',
+        f'-DTBB_ROOT_DIR=$TBB_ROOT',
         "-DNO_EXAMPLES=ON",
         "-DNO_TUTORIALS=ON",
         "-DNO_REGRESSION=ON",
@@ -62,7 +67,16 @@ def build_command():
         "-DNO_GLTESTS=ON",
         "-DBUILD_SHARED_LIBS=ON",
         "-DNO_OPENCL=ON",
+        "-DCMAKE_CUDA_ARCHITECTURES='75;86'",
+        # f'-DPython_ROOT="{env("Python_ROOT")}"',
+        # f'-DPython3_ROOT="{env("Python_ROOT")}"',
+        # f'-DPython_EXECUTABLE="{env("Python_EXECUTABLE")}"',
+        # f'-DPython3_EXECUTABLE="{env("Python_EXECUTABLE")}"',
     ]
+
+    print("config_args")
+    print(config_args)
+    print("-" * 32)
 
     import platform
 

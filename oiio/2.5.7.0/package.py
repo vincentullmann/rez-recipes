@@ -3,7 +3,7 @@ version = "2.5.7.0"
 
 requires = [
     "boost-1.70+",
-    "openexr-3.0+<3.2",
+    "openexr-3.0+",
     "ocio-2.0+",
     "tiff-4.3",
     "openjpeg-2.4",

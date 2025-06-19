@@ -43,11 +43,13 @@ def commands():
     env.PATH.prepend("{root}/bin")
     env.PATH.prepend("{root}/lib")
     env.Ptex_ROOT = "{root}"
+    env.PTEX_LOCATION = '{root}'
 
     import platform
 
     if platform.system() == "Linux":
         env.LD_LIBRARY_PATH.prepend("{root}/lib")
+
 
 
 @early()

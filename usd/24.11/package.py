@@ -2,18 +2,19 @@ name = "usd"
 version = "24.11"
 
 requires = [
-    "openexr-3",
+    "~ptex-2.0+",
     "boost-1.70+",
-    "ocio-2",
-    "oiio-2",
-    "osd-3.4+",
-    "tbb-2020",
     "glew-2.1",
-    "jinja2-3.1",
-    "pyside6",
-    "pyopengl-3.1",
+    "jinja2",
     "numpy",
+    "ocio-2.4",
+    "oiio-2",
+    "openexr-3",
+    "osd-3.4+",
+    "pyopengl-3.1",
+    "pyside6-6.5",
     "python",
+    "tbb-2020+",
 ]
 
 
@@ -37,14 +38,13 @@ def variants():
     if cook_variant:
         # If we're building the package, we want to use the variant supplied to us
         return [ast.literal_eval(cook_variant)]
-    else:
-        # Otherwise tell rez-cook what variants we are capable of building
-        req = ["cfg", "boost", "tbb", "openexr", "ocio", "oiio", "python", "ptex", "osd"]
-        return [x + req for x in [
-                ["platform-linux", "arch-x86_64", "cxx11abi"],
-                ["platform-windows", "arch-AMD64", "vs"],
-            ]
-        ]
+    # else:
+    # Otherwise tell rez-cook what variants we are capable of building
+
+    return [
+        ["platform-linux"],
+        # ["platform-windows", "arch-AMD64", "vs"],
+    ]
 
 
 def commands():
@@ -76,16 +76,27 @@ config_args = [
     "-DCMAKE_INSTALL_PREFIX={install_path}",
     f'-DCMAKE_MODULE_PATH="{env("CMAKE_MODULE_PATH")}"',
     f'-DCMAKE_BUILD_TYPE="{env("REZ_BUILD_CONFIG")}"',
-    f'-DTBB_ROOT_DIR="{env("TBB_ROOT")}"',
+    f'-DTBB_LOCATION="{env("TBB_LOCATION")}"',
     f'-DOPENEXR_LOCATION="{env("OPENEXR_ROOT")}"',
     f'-DOPENSUBDIV_ROOT_DIR="{env("OPENSUBDIV_ROOT")}"',
     f'-DPTEX_LOCATION="{env("Ptex_ROOT")}"',
     f'-DOIIO_LOCATION="{env("OpenImageIO_ROOT")}"',
     f'-DBOOST_ROOT="{env("Boost_ROOT")}"',
+
     f'-DPython_ROOT="{env("Python_ROOT")}"',
     f'-DPython3_ROOT="{env("Python_ROOT")}"',
     f'-DPython_EXECUTABLE="{env("Python_EXECUTABLE")}"',
     f'-DPython3_EXECUTABLE="{env("Python_EXECUTABLE")}"',
+
+    # f'-DPython_ROOT="{env("Python_ROOT")}"',
+    # f'-DPython3_ROOT="{env("Python_ROOT")}"',
+
+    # '-DPython_EXECUTABLE=/usr/bin/python3.11',
+    # '-DPython3_EXECUTABLE=/usr/bin/python3.11',
+    # '-DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.11.so',
+    # "-DPYTHON_INCLUDE_DIR=/usr/include/python3.11",
+
+
     "-DPXR_BUILD_DOCUMENTATION=FALSE",
     "-DPXR_BUILD_TESTS=FALSE",
     "-DPXR_BUILD_EXAMPLES=FALSE",
@@ -93,8 +104,8 @@ config_args = [
     "-DCMAKE_CXX_STANDARD=17",
     # Fix for boost inserting the wrong library names into the libs with 
     # --layout=system...
-    f'-DCMAKE_CXX_FLAGS="-DBOOST_ALL_NO_LIB -D__TBB_show_deprecation_message_task_H -DBOOST_BIND_GLOBAL_PLACEHOLDERS -Wno-class-memaccess {env("CXXFLAGS")}"',
-    " -G Ninja",
+    # f'-DCMAKE_CXX_FLAGS="-DBOOST_ALL_NO_LIB -D__TBB_show_deprecation_message_task_H -DBOOST_BIND_GLOBAL_PLACEHOLDERS -Wno-class-memaccess {env("CXXFLAGS")}"',
+    # " -G Ninja",
 ]
 
 import platform

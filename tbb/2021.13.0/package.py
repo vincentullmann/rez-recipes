@@ -42,15 +42,15 @@ def build_command():
     import platform 
 
     if platform.system() == "Windows":
-        return """
-        Move-Item -Path \"$env:REZ_BUILD_SOURCE_PATH/tbb/*\" -Destination \"$env:REZ_BUILD_INSTALL_PATH\"
+        return f"""
+        Move-Item -Path \"$env:REZ_BUILD_SOURCE_PATH/oneapi-tbb-{version}/*\" -Destination \"$env:REZ_BUILD_INSTALL_PATH\"
         # Copy binaries up to make VDB happy
         Copy-Item -Path \"$env:REZ_BUILD_INSTALL_PATH/lib/intel64/vc14/*\" -Destination \"$env:REZ_BUILD_INSTALL_PATH/lib\"
         Copy-Item -Path \"$env:REZ_BUILD_INSTALL_PATH/bin/intel64/vc14/*\" -Destination \"$env:REZ_BUILD_INSTALL_PATH/bin\"
         """
     else:
-        return '''
-        cp -r $REZ_BUILD_SOURCE_PATH/tbb/* $REZ_BUILD_INSTALL_PATH
+        return f'''
+        cp -r $REZ_BUILD_SOURCE_PATH/oneapi-tbb-{version}/* $REZ_BUILD_INSTALL_PATH
         cp -r $REZ_BUILD_INSTALL_PATH/lib/intel64/gcc4.8/* $REZ_BUILD_INSTALL_PATH/lib/
         '''
 
@@ -61,7 +61,4 @@ def pre_cook():
     if platform.system() == "Windows":
         download_and_unpack(f"https://github.com/uxlfoundation/oneTBB/releases/download/v{version}/oneapi-tbb-{version}-win.zip", move_up=False)
     else:
-        url = f"https://github.com/uxlfoundation/oneTBB/releases/download/v{version}/oneapi-tbb-{version}-lin.tgz"
-        print("Downloading from 1", url)
-        print("Downloading from 2", "https://github.com/uxlfoundation/oneTBB/releases/download/v2021.13.0/oneapi-tbb-2021.13.0-lin.tgz")
         download_and_unpack(f"https://github.com/uxlfoundation/oneTBB/releases/download/v{version}/oneapi-tbb-{version}-lin.tgz", move_up=False)
